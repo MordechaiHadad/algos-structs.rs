@@ -2,29 +2,32 @@ mod search;
 
 #[cfg(test)]
 mod tests {
+    use rstest::rstest;
+
     use crate::search::*;
 
-    #[test]
-    fn linear_search_test() {
+    #[rstest]
+    #[case(69, true)]
+    #[case(1336, false)]
+    #[case(69420, true)]
+    #[case(69421, false)]
+    #[case(1, true)]
+    #[case(0, false)]
+    fn linear_search_test(#[case] x: i32, #[case] y: bool) {
         let result = &[1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420];
-        assert_eq!(linear_search(result, 69), true);
-        assert_eq!(linear_search(result, 1336), false); // rust doesnt support test cases
-                                                        // unfortunate
-        assert_eq!(linear_search(result, 69420), true);
-        assert_eq!(linear_search(result, 69421), false);
-        assert_eq!(linear_search(result, 1), true);
-        assert_eq!(linear_search(result, 0), false);
+        assert_eq!(linear_search(result, x), y);
     }
 
-    #[test]
-    fn binary_search_test() {
+    #[rstest]
+    #[case(69, true)]
+    #[case(1336, false)]
+    #[case(69420, true)]
+    #[case(69421, false)]
+    #[case(1, true)]
+    #[case(0, false)]
+    fn binary_search_test(#[case] x: i32, #[case] y: bool) {
         let result = &[1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420];
-        assert_eq!(binary_search(result, 69), true);
-        assert_eq!(binary_search(result, 1336), false);
-        assert_eq!(binary_search(result, 69420), true);
-        assert_eq!(binary_search(result, 69421), false);
-        assert_eq!(binary_search(result, 1), true);
-        assert_eq!(binary_search(result, 0), false);
+        assert_eq!(binary_search(result, x), y);
     }
 
     #[test]
