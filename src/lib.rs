@@ -1,10 +1,12 @@
+mod datastructs;
 mod search;
+mod sort;
 
 #[cfg(test)]
 mod tests {
     use rstest::rstest;
 
-    use crate::search::*;
+    use crate::{datastructs::Queue, search::*, sort::bubble_sort};
 
     #[rstest]
     #[case(69, true)]
@@ -47,5 +49,37 @@ mod tests {
     #[test]
     fn two_crystal_balls_test_negative() {
         assert_eq!(two_crystal_balls(&[false; 821]), -1);
+    }
+
+    #[test]
+    fn bubble_sort_test() {
+        let mut array = [9, 3, 7, 4, 69, 420, 42];
+
+        bubble_sort(&mut array);
+
+        assert_eq!(array, [3, 4, 7, 9, 42, 69, 420]);
+    }
+
+    #[test]
+    fn queue_enqueue_test() {
+        let mut list: Queue<i32> = Queue::new();
+
+        list.enqueue(1);
+        list.enqueue(3);
+        list.enqueue(4);
+
+        assert_eq!(3, list.length);
+    }
+
+    #[test]
+    fn queue_deque_test() {
+        let mut list: Queue<i32> = Queue::new();
+        list.enqueue(4);
+        list.enqueue(1);
+        list.enqueue(30);
+        list.deque();
+        list.deque();
+
+        assert_eq!(list.deque(), Some(30));
     }
 }
