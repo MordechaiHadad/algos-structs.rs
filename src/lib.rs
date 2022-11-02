@@ -6,7 +6,7 @@ mod sort;
 mod tests {
     use rstest::rstest;
 
-    use crate::{datastructs::Queue, search::*, sort::bubble_sort};
+    use crate::{datastructs::Queue, search::*, sort::*};
 
     #[rstest]
     #[case(69, true)]
@@ -81,5 +81,15 @@ mod tests {
         list.deque();
 
         assert_eq!(list.deque(), Some(30));
+    }
+
+    #[test]
+    fn quck_sort_test() {
+        let mut array = [9, 3, 7, 4, 69, 420, 42];
+        let sorted_array = [3, 4, 7, 9, 42, 69, 420];
+
+        quick_sort(&mut array);
+
+        assert_eq!(array, sorted_array);
     }
 }
